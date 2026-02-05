@@ -2,16 +2,15 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<title>This is for my bestie Shikha 💖</title>
+<title>For My Bestie Shikha 💖</title>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 <style>
 body{
   margin:0;
-  font-family: 'Comic Sans MS', cursive;
-  background: linear-gradient(135deg,#ff9a9e,#fad0c4);
+  font-family:'Comic Sans MS', cursive;
+  background:linear-gradient(135deg,#ff9a9e,#fad0c4);
   text-align:center;
-  overflow:hidden;
 }
 .card{
   background:#fff;
@@ -25,7 +24,7 @@ body{
 h1{color:#ff4d6d;}
 p{font-size:18px;}
 button{
-  padding:12px 22px;
+  padding:12px 24px;
   font-size:18px;
   border:none;
   border-radius:30px;
@@ -35,7 +34,7 @@ button{
 #yes{
   background:#ff4d6d;
   color:#fff;
-  font-size:20px;
+  transition:0.3s;
 }
 #no{
   background:#ccc;
@@ -51,119 +50,92 @@ img{
 
 <body>
 
-<audio id="bgm" loop>
-  <source src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3">
-</audio>
-
-<div class="card" id="step1">
+<div class="card" id="s1">
   <h1>Welcome Bestie 💕</h1>
-  <p>Shikhu… thoda sa smile karo 😊</p>
-  <button onclick="next1()">Next ➡️</button>
+  <p>Shikhu… thoda sa smile please 😊</p>
+  <button onclick="go(1,2)">Next ➡️</button>
 </div>
 
-<div class="card hidden" id="step2">
+<div class="card hidden" id="s2">
   <h1>Will you be my Valentine? 💖</h1>
   <img id="react" src="https://media.tenor.com/9I6M1R8kGvEAAAAC/panda-cute.gif">
   <br>
-  <button id="yes" onclick="yesClicked()">YES 💘</button>
+  <button id="yes" onclick="go(2,3)">YES 💘</button>
   <button id="no">NO 🙄</button>
 </div>
 
-<div class="card hidden" id="step3">
-  <h1>Mujhe pata tha tum maan jaogi 🥹💗</h1>
-  <p>Ab thoda sa fun quiz 😁</p>
-  <button onclick="nextQuiz()">Start 🎉</button>
+<div class="card hidden" id="s3">
+  <h1>Mujhe pata tha tum maan jaogi 🥹</h1>
+  <p>Chalo ek chhota sa fun quiz 😁</p>
+  <button onclick="go(3,4)">Start 🎉</button>
 </div>
 
 <div class="card hidden" id="quiz">
-  <h1 id="q">Question</h1>
-  <button onclick="correct()">Option 1</button><br>
-  <button onclick="correct()">Option 2</button><br>
-  <button onclick="correct()">Option 3</button>
+  <h1 id="q"></h1>
+  <button onclick="nextQ()">Bilkul YES 😄</button><br>
+  <button onclick="nextQ()">Obviously 💖</button><br>
+  <button onclick="nextQ()">Hamesha 🫶</button>
 </div>
 
 <div class="card hidden" id="gift">
   <h1>Something for You 🎁</h1>
-  <p>Yaha tum apni photos daal sakte ho 💕</p>
+  <p>Yaha humari memories 💕</p>
   <img src="https://via.placeholder.com/120">
   <img src="https://via.placeholder.com/120">
   <img src="https://via.placeholder.com/120">
-  <p>Teddy Pinku 🧸 bhi khush hai 😄</p>
-  <button onclick="end()">Final 💖</button>
+  <p>Pinku 🧸 bhi approve karta hai 😄</p>
+  <button onclick="go('gift','end')">Final 💖</button>
 </div>
 
 <div class="card hidden" id="end">
   <h1>Empu Empu 💋</h1>
   <p>
-    Shikha, tum sirf meri bestie nahi ho…  
-    tum meri sabse pyari feeling ho ❤️  
-    Hamesha mere saath rehna 🫶  
+    Phool ho gulab ka 🌹, saheli mat samajhna 🤭<br>
+Permanent hoon life mein, temporary mat samajhna 😎
   </p>
-  <p>— From Tapan 🌸</p>
+  <p>— From your bestu 💖</p>
 </div>
 
 <script>
-let noCount=0;
 const reacts=[
 "https://media.tenor.com/9I6M1R8kGvEAAAAC/panda-cute.gif",
 "https://media.tenor.com/5ZkZ5ZkZ5ZkAAAAC/cat-cute.gif",
 "https://media.tenor.com/2K7R8YyZyQYAAAAC/dog-sad.gif",
 "https://media.tenor.com/8dKcZ8dKcZAAAAC/duck-cute.gif"
 ];
-
-function next1(){
- document.getElementById("step1").classList.add("hidden");
- document.getElementById("step2").classList.remove("hidden");
- document.getElementById("bgm").play();
-}
-
+let noCount=0;
 const noBtn=document.getElementById("no");
+
 noBtn.addEventListener("mouseover",()=>{
- noCount++;
- document.getElementById("react").src=reacts[noCount%reacts.length];
- noBtn.style.left=Math.random()*80+"%";
- noBtn.style.top=Math.random()*80+"%";
- if(noCount>4){
-   document.getElementById("yes").style.fontSize="30px";
- }
+  noCount++;
+  document.getElementById("react").src=reacts[noCount%reacts.length];
+  noBtn.style.left=Math.random()*80+"%";
+  noBtn.style.top=Math.random()*80+"%";
+  document.getElementById("yes").style.fontSize=20+noCount*2+"px";
 });
 
-function yesClicked(){
- document.getElementById("step2").classList.add("hidden");
- document.getElementById("step3").classList.remove("hidden");
+function go(a,b){
+ document.getElementById("s"+a)?.classList.add("hidden");
+ document.getElementById(b=="gift"?b:"s"+b).classList.remove("hidden");
 }
 
-let qi=0;
 const questions=[
 "Mujhe chhodkar kabhi nahi jaogi? 🥺",
 "Mere saath chicken tikka khaogi? 🍗",
 "Mere saath shopping chalogi? 🛍️",
 "Pinku ko mujhse milwaogi? 🧸"
 ];
+let qi=0;
 
-function nextQuiz(){
- document.getElementById("step3").classList.add("hidden");
- document.getElementById("quiz").classList.remove("hidden");
- loadQ();
-}
-
-function loadQ(){
+function nextQ(){
  if(qi>=questions.length){
    document.getElementById("quiz").classList.add("hidden");
    document.getElementById("gift").classList.remove("hidden");
    return;
  }
- document.getElementById("q").innerText=questions[qi];
- qi++;
-}
-
-function correct(){ loadQ(); }
-
-function end(){
- document.getElementById("gift").classList.add("hidden");
- document.getElementById("end").classList.remove("hidden");
+ document.getElementById("q").innerText=questions[qi++];
 }
 </script>
 
 </body>
-  </html>
+</html>
