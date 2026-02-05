@@ -1,139 +1,117 @@
-<!DOCTYPE html>
+
+  <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<title>For My Bestie Shikha 💖</title>
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>For Shikha 💖</title>
 
 <style>
+*{box-sizing:border-box}
 body{
   margin:0;
-  font-family:'Comic Sans MS', cursive;
-  background:linear-gradient(135deg,#ff9a9e,#fad0c4);
-  text-align:center;
+  height:100vh;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  font-family: system-ui, -apple-system, Segoe UI, Roboto, Arial;
+  background: linear-gradient(135deg,#ffd1dc,#fff1f6);
 }
 .card{
   background:#fff;
-  margin:40px auto;
-  padding:25px;
-  border-radius:20px;
-  width:90%;
+  width:92%;
   max-width:420px;
-  box-shadow:0 10px 25px rgba(0,0,0,0.2);
+  padding:28px;
+  border-radius:22px;
+  text-align:center;
+  box-shadow:0 20px 40px rgba(0,0,0,.15);
 }
-h1{color:#ff4d6d;}
-p{font-size:18px;}
+h1{margin:8px 0;color:#ff4d6d}
+p{color:#444}
+img{
+  width:160px;
+  border-radius:16px;
+  margin:12px 0;
+}
+.btns{position:relative;height:70px}
 button{
-  padding:12px 24px;
-  font-size:18px;
   border:none;
-  border-radius:30px;
+  border-radius:999px;
+  padding:12px 22px;
+  font-size:16px;
   cursor:pointer;
-  margin:10px;
 }
 #yes{
   background:#ff4d6d;
   color:#fff;
-  transition:0.3s;
+  transition:transform .2s;
 }
 #no{
-  background:#ccc;
+  background:#e5e7eb;
   position:absolute;
+  right:0;
 }
-img{
-  width:120px;
-  margin:10px;
+.hidden{display:none}
+.gallery img{
+  width:110px;height:110px;object-fit:cover;
+  border-radius:14px;margin:6px
 }
-.hidden{display:none;}
 </style>
 </head>
 
 <body>
 
 <div class="card" id="s1">
-  <h1>Welcome Bestie 💕</h1>
-  <p>Shikhu… thoda sa smile please 😊</p>
-  <button onclick="go(1,2)">Next ➡️</button>
+  <h1>Hey Shikha 🌸</h1>
+  <p>One quick question…</p>
+  <button onclick="go(1,2)">Continue →</button>
 </div>
 
 <div class="card hidden" id="s2">
   <h1>Will you be my Valentine? 💖</h1>
-  <img id="react" src="https://media.tenor.com/9I6M1R8kGvEAAAAC/panda-cute.gif">
-  <br>
-  <button id="yes" onclick="go(2,3)">YES 💘</button>
-  <button id="no">NO 🙄</button>
+  <img id="gif" src="https://media.tenor.com/9I6M1R8kGvEAAAAC/panda-cute.gif">
+  <div class="btns">
+    <button id="yes" onclick="win()">Yes 💘</button>
+    <button id="no">No 🙃</button>
+  </div>
 </div>
 
 <div class="card hidden" id="s3">
-  <h1>Mujhe pata tha tum maan jaogi 🥹</h1>
-  <p>Chalo ek chhota sa fun quiz 😁</p>
-  <button onclick="go(3,4)">Start 🎉</button>
-</div>
-
-<div class="card hidden" id="quiz">
-  <h1 id="q"></h1>
-  <button onclick="nextQ()">Bilkul YES 😄</button><br>
-  <button onclick="nextQ()">Obviously 💖</button><br>
-  <button onclick="nextQ()">Hamesha 🫶</button>
-</div>
-
-<div class="card hidden" id="gift">
-  <h1>Something for You 🎁</h1>
-  <p>Yaha humari memories 💕</p>
-  <img src="https://via.placeholder.com/120">
-  <img src="https://via.placeholder.com/120">
-  <img src="https://via.placeholder.com/120">
-  <p>Pinku 🧸 bhi approve karta hai 😄</p>
-  <button onclick="go('gift','end')">Final 💖</button>
-</div>
-
-<div class="card hidden" id="end">
-  <h1>Empu Empu 💋</h1>
-  <p>
-    Phool ho gulab ka 🌹, saheli mat samajhna 🤭<br>
-Permanent hoon life mein, temporary mat samajhna 😎
-  </p>
-  <p>— From your bestu 💖</p>
+  <h1>I knew it 😌</h1>
+  <p>Phool ho gulab ka 🌹, saheli mat samajhna 😉</p>
+  <div class="gallery">
+    <!--🙈 -->
+    <img src="https://via.placeholder.com/120">
+    <img src="https://via.placeholder.com/120">
+    <img src="https://via.placeholder.com/120">
+  </div>
+  <p>— Tapan 💖</p>
 </div>
 
 <script>
-const reacts=[
-"https://media.tenor.com/9I6M1R8kGvEAAAAC/panda-cute.gif",
-"https://media.tenor.com/5ZkZ5ZkZ5ZkAAAAC/cat-cute.gif",
-"https://media.tenor.com/2K7R8YyZyQYAAAAC/dog-sad.gif",
-"https://media.tenor.com/8dKcZ8dKcZAAAAC/duck-cute.gif"
-];
-let noCount=0;
-const noBtn=document.getElementById("no");
+let grows=0;
+const no=document.getElementById('no');
+const yes=document.getElementById('yes');
+const gif=document.getElementById('gif');
 
-noBtn.addEventListener("mouseover",()=>{
-  noCount++;
-  document.getElementById("react").src=reacts[noCount%reacts.length];
-  noBtn.style.left=Math.random()*80+"%";
-  noBtn.style.top=Math.random()*80+"%";
-  document.getElementById("yes").style.fontSize=20+noCount*2+"px";
+no.addEventListener('mouseover',()=>{
+  // No bhaagega
+  no.style.left = Math.random()*70 + '%';
+  no.style.top  = Math.random()*40 + 'px';
+  // Yes grow hoga
+  grows++;
+  yes.style.transform = `scale(${1 + grows*0.15})`;
+  // cute single gif (viral style: ek hi)
+  gif.src="https://media.tenor.com/9I6M1R8kGvEAAAAC/panda-cute.gif";
 });
 
 function go(a,b){
- document.getElementById("s"+a)?.classList.add("hidden");
- document.getElementById(b=="gift"?b:"s"+b).classList.remove("hidden");
+  document.getElementById('s'+a).classList.add('hidden');
+  document.getElementById('s'+b).classList.remove('hidden');
 }
-
-const questions=[
-"Mujhe chhodkar kabhi nahi jaogi? 🥺",
-"Mere saath chicken tikka khaogi? 🍗",
-"Mere saath shopping chalogi? 🛍️",
-"Pinku ko mujhse milwaogi? 🧸"
-];
-let qi=0;
-
-function nextQ(){
- if(qi>=questions.length){
-   document.getElementById("quiz").classList.add("hidden");
-   document.getElementById("gift").classList.remove("hidden");
-   return;
- }
- document.getElementById("q").innerText=questions[qi++];
+function win(){
+  document.getElementById('s2').classList.add('hidden');
+  document.getElementById('s3').classList.remove('hidden');
 }
 </script>
 
